@@ -4,5 +4,7 @@
 ### Flash Your Code Deck to Nail the Technical Interview
 Practice your coding challenges and check them vs answers in 4 different languages.
 
+[Card Deck Trello](https://trello.com/b/dUkvZ0To/code-deck)
+
 ![Imgur](https://i.imgur.com/l5I3AWy.png)
 ![Imgur](https://i.imgur.com/CJ9NqoE.png)
