@@ -9,6 +9,7 @@ namespace CodeDeckAPI.Models
         public CodeChallenge CodeChallenge { get; set; }
         public int CodeChallengeId { get; set; }
         public JavaScriptAnswers JavaScriptAnswers { get; set; }
+        public JavaAnswers JavaAnswer { get; set; }
 
     }
 }
