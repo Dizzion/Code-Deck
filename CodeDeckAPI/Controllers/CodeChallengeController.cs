@@ -44,6 +44,7 @@ namespace CodeDeckAPI.Controllers
             return NotFound();
         }
 
+        // POST /api/CodeDeck
         [HttpPost]
         public ActionResult <CodeChallengeReadDto> CreateCodeChallenge(CodeChallengeCreateDto codeChallengeCreateDto)
         {
@@ -56,6 +57,7 @@ namespace CodeDeckAPI.Controllers
             return CreatedAtRoute(nameof(GetCodeChallengeById), new {Id = codeChallengeReadDto.Id}, codeChallengeReadDto);
         }
 
+        // PUT /api/CodeDeck/{id} Full Update of Item
         [HttpPut("{id}")]
         public ActionResult UpdateCodeChallenge(int id, CodeChallengeUpdateDto codeChallengeUpdateDto)
         {
@@ -72,6 +74,7 @@ namespace CodeDeckAPI.Controllers
             return NoContent();
         }
 
+        // PATCH /api/CodeDeck/{id} Partial Update of Item
         [HttpPatch("{id}")]
         public ActionResult PartialCodeChallengeUpdate(int id, JsonPatchDocument<CodeChallengeUpdateDto> patchDoc)
         {
