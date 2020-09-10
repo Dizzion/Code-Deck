@@ -8,7 +8,7 @@ namespace CodeDeckAPI.Models
         public int Id { get; set; }
         public CodeChallenge CodeChallenge { get; set; }
         public int CodeChallengeId { get; set; }
-
+        public JavaScriptAnswers JavaScriptAnswers { get; set; }
 
     }
 }

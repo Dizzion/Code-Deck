@@ -12,5 +12,6 @@ namespace CodeDeckAPI.Data
 
         public DbSet<CodeChallenge> CodeChallenges { get; set; }
         public DbSet<Answers> Answers { get; set; }
+        public DbSet<JavaScriptAnswers> JavaScriptAnswers { get; set; }
     }
 }
