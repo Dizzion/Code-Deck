@@ -3,6 +3,7 @@ using AutoMapper;
 using CodeDeckAPI.Data;
 using CodeDeckAPI.Dtos;
 using CodeDeckAPI.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeDeckAPI.Controllers
@@ -53,6 +54,46 @@ namespace CodeDeckAPI.Controllers
             var codeChallengeReadDto = _mapper.Map<CodeChallengeReadDto>(codeChallengeModel);
 
             return CreatedAtRoute(nameof(GetCodeChallengeById), new {Id = codeChallengeReadDto.Id}, codeChallengeReadDto);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateCodeChallenge(int id, CodeChallengeUpdateDto codeChallengeUpdateDto)
+        {
+            var codeChallengeModelFromRepo = _repo.GetCodeChallengeById(id);
+            if(codeChallengeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(codeChallengeUpdateDto, codeChallengeModelFromRepo);
+            _repo.UpdateCodeChallenge(codeChallengeModelFromRepo);
+            _repo.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PartialCodeChallengeUpdate(int id, JsonPatchDocument<CodeChallengeUpdateDto> patchDoc)
+        {
+            var codeChallengeModelFromRepo = _repo.GetCodeChallengeById(id);
+            if(codeChallengeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var codeChallengeToPatch = _mapper.Map<CodeChallengeUpdateDto>(codeChallengeModelFromRepo);
+            patchDoc.ApplyTo(codeChallengeToPatch, ModelState);
+
+            if(!TryValidateModel(codeChallengeToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(codeChallengeToPatch, codeChallengeModelFromRepo);
+            _repo.UpdateCodeChallenge(codeChallengeModelFromRepo);
+            _repo.SaveChanges();
+
+            return NoContent();
         }
     }
 }
