@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeDeckAPI.Models;
@@ -13,6 +14,16 @@ namespace CodeDeckAPI.Data
             _context = context;
         }
 
+        public void CreateCodeChallenge(CodeChallenge cc)
+        {
+            if(cc == null)
+            {
+                throw new ArgumentNullException(nameof(cc));
+            }
+
+            _context.CodeChallenges.Add(cc);
+        }
+
         public IEnumerable<CodeChallenge> GetAllChallenges()
         {
             return _context.CodeChallenges.ToList();
@@ -26,6 +37,11 @@ namespace CodeDeckAPI.Data
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public void UpdateCodeChallenge(CodeChallenge cc)
+        {
+            // Nothing
         }
     }
 }

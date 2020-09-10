@@ -10,5 +10,8 @@ namespace CodeDeckAPI.Data
          IEnumerable<CodeChallenge> GetAllChallenges();
 
          CodeChallenge GetCodeChallengeById(int id);
+
+         void CreateCodeChallenge(CodeChallenge cc);
+         void UpdateCodeChallenge(CodeChallenge cc);
     }
 }

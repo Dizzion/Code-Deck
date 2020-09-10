@@ -5,6 +5,11 @@ namespace CodeDeckAPI.Data
 {
     public class MockCodeChallengeRepo : ICodeChallengeRepo
     {
+        public void CreateCodeChallenge(CodeChallenge cc)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<CodeChallenge> GetAllChallenges()
         {
             var codeChallenges = new List<CodeChallenge>
@@ -23,6 +28,11 @@ namespace CodeDeckAPI.Data
         }
 
         public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateCodeChallenge(CodeChallenge cc)
         {
             throw new System.NotImplementedException();
         }
