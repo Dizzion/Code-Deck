@@ -11,6 +11,6 @@ namespace CodeDeckAPI.Models
         public JavaScriptAnswers JavaScriptAnswers { get; set; }
         public JavaAnswers JavaAnswer { get; set; }
         public PythonAnswers PythonAnswers { get; set; }
-
+        public CAnswers CAnswers { get; set; }
     }
 }
