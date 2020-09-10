@@ -10,6 +10,7 @@ namespace CodeDeckAPI.Models
         public int CodeChallengeId { get; set; }
         public JavaScriptAnswers JavaScriptAnswers { get; set; }
         public JavaAnswers JavaAnswer { get; set; }
+        public PythonAnswers PythonAnswers { get; set; }
 
     }
 }
