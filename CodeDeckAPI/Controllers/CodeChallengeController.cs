@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AutoMapper;
 using CodeDeckAPI.Data;
+using CodeDeckAPI.Dtos;
 using CodeDeckAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,20 +23,36 @@ namespace CodeDeckAPI.Controllers
 
         // GET /api/CodeDeck
         [HttpGet]
-        public ActionResult <IEnumerable<CodeChallenge>> GetAllChallenges()
+        public ActionResult <IEnumerable<CodeChallengeReadDto>> GetAllChallenges()
         {
             var challengeItems = _repo.GetAllChallenges();
 
-            return Ok(challengeItems);
+            return Ok(_mapper.Map<IEnumerable<CodeChallengeReadDto>>(challengeItems));
         }
 
         // GET /api/CodeDeck/{id}
-        [HttpGet("{id}")]
-        public ActionResult <CodeChallenge> getChallengeById(int id)
+        [HttpGet("{id}", Name="GetCodeChallengeById")]
+        public ActionResult <CodeChallengeReadDto> GetCodeChallengeById(int id)
         {
             var challengeItem = _repo.GetCodeChallengeById(id);
 
-            return Ok(challengeItem);
+            if(challengeItem != null)
+            {
+                return Ok(challengeItem);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult <CodeChallengeReadDto> CreateCodeChallenge(CodeChallengeCreateDto codeChallengeCreateDto)
+        {
+            var codeChallengeModel = _mapper.Map<CodeChallenge>(codeChallengeCreateDto);
+            _repo.CreateCodeChallenge(codeChallengeModel);
+            _repo.SaveChanges();
+
+            var codeChallengeReadDto = _mapper.Map<CodeChallengeReadDto>(codeChallengeModel);
+
+            return CreatedAtRoute(nameof(GetCodeChallengeById), new {Id = codeChallengeReadDto.Id}, codeChallengeReadDto);
         }
     }
 }
