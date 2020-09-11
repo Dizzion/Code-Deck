@@ -40,6 +40,7 @@ namespace CodeDeckAPI
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICodeCardRepo, SqlCodeCardRepo>();
+            services.AddScoped<IAuthRepo, AuthRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
