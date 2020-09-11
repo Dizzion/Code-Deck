@@ -12,5 +12,8 @@ namespace CodeDeckAPI.Models
 
         [Required]
         public Difficulty Difficulty { get; set; } = Difficulty.Easy;
+
+        [Required]
+        public Answers Answers { get; set; }
     }
 }
