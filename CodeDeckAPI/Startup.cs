@@ -29,7 +29,7 @@ namespace CodeDeckAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CodeChallengeContext>(opt => opt.UseSqlServer
+            services.AddDbContext<CodeCardContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("CodeDeckConnection")));
 
             services.AddCors();
@@ -39,8 +39,7 @@ namespace CodeDeckAPI
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //services.AddScoped<ICodeChallengeRepo, MockCodeChallengeRepo>();
-            services.AddScoped<ICodeChallengeRepo, SqlCodeChallengeRepo>();
+            services.AddScoped<ICodeCardRepo, SqlCodeCardRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

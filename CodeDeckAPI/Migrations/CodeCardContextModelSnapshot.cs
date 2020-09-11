@@ -3,16 +3,14 @@ using CodeDeckAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeDeckAPI.Migrations
 {
-    [DbContext(typeof(CodeChallengeContext))]
-    [Migration("20200910054401_InitialMigration")]
-    partial class InitialMigration
+    [DbContext(typeof(CodeCardContext))]
+    partial class CodeCardContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,23 +18,35 @@ namespace CodeDeckAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CodeDeckAPI.Models.CodeChallenge", b =>
+            modelBuilder.Entity("CodeDeckAPI.Models.CodeCard", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ChallengeCode")
+                    b.Property<string>("CAnswers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Challenge")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Difficulty")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("JavaAnswer")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("CodeChallenges");
+                    b.Property<string>("JavaScriptAnswer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PythonAnswer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CardId");
+
+                    b.ToTable("CodeCards");
                 });
 #pragma warning restore 612, 618
         }

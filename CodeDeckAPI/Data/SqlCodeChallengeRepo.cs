@@ -5,33 +5,33 @@ using CodeDeckAPI.Models;
 
 namespace CodeDeckAPI.Data
 {
-    public class SqlCodeChallengeRepo : ICodeChallengeRepo
+    public class SqlCodeCardRepo : ICodeCardRepo
     {
-        private readonly CodeChallengeContext _context;
+        private readonly CodeCardContext _context;
 
-        public SqlCodeChallengeRepo(CodeChallengeContext context)
+        public SqlCodeCardRepo(CodeCardContext context)
         {
             _context = context;
         }
 
-        public void CreateCodeChallenge(CodeChallenge cc)
+        public void CreateCodeCard(CodeCard cc)
         {
             if(cc == null)
             {
                 throw new ArgumentNullException(nameof(cc));
             }
 
-            _context.CodeChallenges.Add(cc);
+            _context.CodeCards.Add(cc);
         }
 
-        public IEnumerable<CodeChallenge> GetAllChallenges()
+        public IEnumerable<CodeCard> GetAllCards()
         {
-            return _context.CodeChallenges.ToList();
+            return _context.CodeCards.ToList();
         }
 
-        public CodeChallenge GetCodeChallengeById(int id)
+        public CodeCard GetCodeCardById(int id)
         {
-            return _context.CodeChallenges.FirstOrDefault(p => p.Id == id);
+            return _context.CodeCards.FirstOrDefault(p => p.CardId == id);
         }
 
         public bool SaveChanges()
@@ -39,7 +39,7 @@ namespace CodeDeckAPI.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public void UpdateCodeChallenge(CodeChallenge cc)
+        public void UpdateCodeCard(CodeCard cc)
         {
             // Nothing
         }
