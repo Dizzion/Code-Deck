@@ -48,9 +48,10 @@ namespace CodeDeckAPI.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles = Role.Admin)]
         // POST /api/CodeDeck
         [HttpPost]
-        public ActionResult <CodeCardReadDto> CreateCodeCard(CodeCardCreateDto codeCardCreateDto)
+        public ActionResult CreateCodeCard(CodeCardCreateDto codeCardCreateDto)
         {
             var codeCardModel = _mapper.Map<CodeCard>(codeCardCreateDto);
             _repo.CreateCodeCard(codeCardModel);
@@ -58,9 +59,10 @@ namespace CodeDeckAPI.Controllers
 
             var codeCardReadDto = _mapper.Map<CodeCardReadDto>(codeCardModel);
 
-            return CreatedAtRoute(nameof(GetCodeCardById), new {CodeCardId = codeCardReadDto.CardId}, codeCardReadDto);
+            return NoContent();
         }
 
+        [Authorize(Roles = Role.Admin)]
         // PUT /api/CodeDeck/{id} Full Update of Item
         [HttpPut("{id}")]
         public ActionResult UpdateCodeCard(int id, CodeCardUpdateDto codeCardUpdateDto)
@@ -78,6 +80,7 @@ namespace CodeDeckAPI.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = Role.Admin)]
         // PATCH /api/CodeDeck/{id} Partial Update of Item
         [HttpPatch("{id}")]
         public ActionResult PartialCodeCardUpdate(int id, JsonPatchDocument<CodeCardUpdateDto> patchDoc)
