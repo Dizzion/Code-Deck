@@ -6,5 +6,5 @@ Practice your coding challenges and check them vs answers in 4 different languag
 
 [Code Deck Trello](https://trello.com/b/dUkvZ0To/code-deck)
 
-![Imgur](https://i.imgur.com/l5I3AWy.png)
+![Imgur](https://i.imgur.com/Y6H31vN.png)
 ![Imgur](https://i.imgur.com/CJ9NqoE.png)
