@@ -4,14 +4,16 @@ using CodeDeckAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeDeckAPI.Migrations
 {
     [DbContext(typeof(CodeCardContext))]
-    partial class CodeCardContextModelSnapshot : ModelSnapshot
+    [Migration("20200911050746_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,36 +71,6 @@ namespace CodeDeckAPI.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("CodeDeckAPI.Models.UserCard", b =>
-                {
-                    b.Property<int>("CodeCardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CodeCardId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCards");
-                });
-
-            modelBuilder.Entity("CodeDeckAPI.Models.UserCard", b =>
-                {
-                    b.HasOne("CodeDeckAPI.Models.CodeCard", "CodeCard")
-                        .WithMany("UserCards")
-                        .HasForeignKey("CodeCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CodeDeckAPI.Models.User", "User")
-                        .WithMany("UserCards")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

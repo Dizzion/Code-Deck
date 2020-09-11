@@ -11,5 +11,13 @@ namespace CodeDeckAPI.Data
         }
 
         public DbSet<CodeCard> CodeCards { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserCard> UserCards { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserCard>()
+                .HasKey(uc => new { uc.CodeCardId, uc.UserId });
+        }
     }
 }

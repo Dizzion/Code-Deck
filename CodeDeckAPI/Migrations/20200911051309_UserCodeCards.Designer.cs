@@ -4,14 +4,16 @@ using CodeDeckAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeDeckAPI.Migrations
 {
     [DbContext(typeof(CodeCardContext))]
-    partial class CodeCardContextModelSnapshot : ModelSnapshot
+    [Migration("20200911051309_UserCodeCards")]
+    partial class UserCodeCards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,12 @@ namespace CodeDeckAPI.Migrations
                     b.Property<string>("PythonAnswer")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("CardId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CodeCards");
                 });
@@ -71,34 +78,11 @@ namespace CodeDeckAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CodeDeckAPI.Models.UserCard", b =>
+            modelBuilder.Entity("CodeDeckAPI.Models.CodeCard", b =>
                 {
-                    b.Property<int>("CodeCardId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CodeCardId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCards");
-                });
-
-            modelBuilder.Entity("CodeDeckAPI.Models.UserCard", b =>
-                {
-                    b.HasOne("CodeDeckAPI.Models.CodeCard", "CodeCard")
-                        .WithMany("UserCards")
-                        .HasForeignKey("CodeCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CodeDeckAPI.Models.User", "User")
-                        .WithMany("UserCards")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("CodeDeckAPI.Models.User", null)
+                        .WithMany("CodeCards")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

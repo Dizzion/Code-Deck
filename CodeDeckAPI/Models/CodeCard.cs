@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CodeDeckAPI.Models
@@ -14,5 +15,6 @@ namespace CodeDeckAPI.Models
         public string JavaScriptAnswer { get; set; } = null;
         public string PythonAnswer { get; set; } = null;
         public string CAnswers { get; set; } = null;
+        public List<UserCard> UserCards { get; set; }
     }
 }
