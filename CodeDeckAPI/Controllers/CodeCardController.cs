@@ -36,7 +36,7 @@ namespace CodeDeckAPI.Controllers
 
         [AllowAnonymous]
         // GET /api/CodeDeck/{id}
-        [HttpGet("{id}", Name="GetCodeCardById")]
+        [HttpGet("{id}")]
         public ActionResult <CodeCardReadDto> GetCodeCardById(int id)
         {
             var cardItem = _repo.GetCodeCardById(id);

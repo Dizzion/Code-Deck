@@ -13,6 +13,7 @@ namespace CodeDeckAPI.Profiles
             CreateMap<CodeCardCreateDto, CodeCard>();
             CreateMap<CodeCardUpdateDto, CodeCard>();
             CreateMap<CodeCard, CodeCardUpdateDto>();
+            CreateMap<User, UserReadDto>();
         }
     }
 }

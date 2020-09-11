@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using CodeDeckAPI.Data;
 using CodeDeckAPI.Dtos;
 using CodeDeckAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeDeckAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/api/auth")]
     public class AuthController : ControllerBase
@@ -17,6 +19,7 @@ namespace CodeDeckAPI.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto) 
         {
@@ -30,6 +33,7 @@ namespace CodeDeckAPI.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto) 
         {
@@ -41,6 +45,18 @@ namespace CodeDeckAPI.Controllers
                 return BadRequest(response);
             }
             return Ok(response);
+        }
+
+        [HttpGet("User/{username}")]
+        public ActionResult <UserReadDto> GetUserByUsername(string username)
+        {
+            var userItem = _authRepo.GetUserByUsername(username);
+
+            if(userItem != null)
+            {
+                return Ok(userItem);
+            }
+            return NotFound();
         }
     }
 }
