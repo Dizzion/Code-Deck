@@ -3,11 +3,13 @@ using AutoMapper;
 using CodeDeckAPI.Data;
 using CodeDeckAPI.Dtos;
 using CodeDeckAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeDeckAPI.Controllers
 {
+    [Authorize]
     // /api/CodeDeck
     [ApiController]
     [Route("api/CodeDeck")]
@@ -22,6 +24,7 @@ namespace CodeDeckAPI.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         // GET /api/CodeDeck
         [HttpGet]
         public ActionResult <IEnumerable<CodeCardReadDto>> GetAllCards()
@@ -31,6 +34,7 @@ namespace CodeDeckAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<CodeCardReadDto>>(cardItems));
         }
 
+        [AllowAnonymous]
         // GET /api/CodeDeck/{id}
         [HttpGet("{id}", Name="GetCodeCardById")]
         public ActionResult <CodeCardReadDto> GetCodeCardById(int id)
