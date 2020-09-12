@@ -7,6 +7,6 @@ namespace CodeDeckAPI.Dtos
     {
         public string Username { get; set; }
         public string Role { get; set; }
-        public List<UserCard> UserCards { get; set; }
+        public List<CodeCardReadDto> CodeCards { get; set; }
     }
 }
