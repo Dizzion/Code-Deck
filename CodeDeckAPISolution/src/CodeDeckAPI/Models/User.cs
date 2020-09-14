@@ -10,6 +10,6 @@ namespace CodeDeckAPI.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Role { get; set; } = "User";
-        public List<UserCard> UserCards { get; set; }
+        public List<CodeCard> UserCard { get; set; }
     }
 }

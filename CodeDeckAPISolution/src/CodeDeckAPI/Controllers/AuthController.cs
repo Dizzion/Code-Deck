@@ -52,11 +52,11 @@ namespace CodeDeckAPI.Controllers
         {
             var userItem = _authRepo.GetUserByUsername(username);
 
-            if(userItem != null)
+            if(userItem == null)
             {
-                return Ok(userItem);
+                return NotFound();
             }
-            return NotFound();
+            return Ok(userItem);
         }
     }
 }
