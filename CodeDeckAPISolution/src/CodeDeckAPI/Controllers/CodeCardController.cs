@@ -36,22 +36,22 @@ namespace CodeDeckAPI.Controllers
 
         [AllowAnonymous]
         // GET /api/CodeDeck/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCodeCardById")]
         public ActionResult <CodeCardReadDto> GetCodeCardById(int id)
         {
             var cardItem = _repo.GetCodeCardById(id);
 
-            if(cardItem != null)
+            if(cardItem == null)
             {
-                return Ok(cardItem);
+                return NotFound();
             }
-            return NotFound();
+            return Ok(_mapper.Map<CodeCardReadDto>(cardItem));
         }
 
         [Authorize(Roles = Role.Admin)]
         // POST /api/CodeDeck
         [HttpPost]
-        public ActionResult CreateCodeCard(CodeCardCreateDto codeCardCreateDto)
+        public ActionResult<CodeCardReadDto> CreateCodeCard(CodeCardCreateDto codeCardCreateDto)
         {
             var codeCardModel = _mapper.Map<CodeCard>(codeCardCreateDto);
             _repo.CreateCodeCard(codeCardModel);
@@ -59,7 +59,7 @@ namespace CodeDeckAPI.Controllers
 
             var codeCardReadDto = _mapper.Map<CodeCardReadDto>(codeCardModel);
 
-            return NoContent();
+            return CreatedAtRoute(nameof(GetCodeCardById), new { CardId = codeCardReadDto.CardId}, codeCardReadDto);
         }
 
         [Authorize(Roles = Role.Admin)]
