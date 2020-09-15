@@ -35,9 +35,7 @@ namespace CodeDeckAPI
         {
             var builder = new SqlConnectionStringBuilder();
             builder.ConnectionString = 
-                Configuration.GetConnectionString("CodeDeckConnection");
-            builder.UserID = Configuration["UserID"];
-            builder.Password = Configuration["Password"];
+                Configuration["ConnectionStrings:CodeDeckConnection"];
             services.AddDbContext<CodeCardContext>(opt => opt.UseSqlServer
                 (builder.ConnectionString));
 
