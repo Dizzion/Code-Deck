@@ -19,10 +19,12 @@ namespace CodeDeckAPI.Tests
                 CAnswers = "Answer"
             };
         }
+
         public void Dispose()
         {
             testCodeCard = null;
         }
+
         [Fact]
         public void CanChangeChallenge()
         {
@@ -33,6 +35,7 @@ namespace CodeDeckAPI.Tests
             //Assert
             Assert.Equal("Execute Unit Tests", testCodeCard.Challenge);
         }
+
         [Fact]
         public void CanChangeJavaAnswer()
         {
@@ -43,6 +46,7 @@ namespace CodeDeckAPI.Tests
             //Assert
             Assert.Equal("Execute Java Answers", testCodeCard.JavaAnswer);
         }
+
         [Fact]
         public void CanChangeJavaScriptAnswer()
         {
@@ -53,6 +57,7 @@ namespace CodeDeckAPI.Tests
             //Assert
             Assert.Equal("Execute JavaScript Answers", testCodeCard.JavaScriptAnswer);
         }
+
         [Fact]
         public void CanChangePythonAnswer()
         {
@@ -63,6 +68,7 @@ namespace CodeDeckAPI.Tests
             //Assert
             Assert.Equal("Execute Python Answers", testCodeCard.PythonAnswer);
         }
+        
         [Fact]
         public void CanChangeCAnswer()
         {
