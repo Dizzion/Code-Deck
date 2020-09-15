@@ -39,6 +39,7 @@ namespace CodeDeckAPI
             services.AddDbContext<CodeCardContext>(opt => opt.UseSqlServer
                 (builder.ConnectionString));
 
+            services.AddCors();
             
             services.AddControllers().AddNewtonsoftJson(s => {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -73,6 +74,11 @@ namespace CodeDeckAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();
