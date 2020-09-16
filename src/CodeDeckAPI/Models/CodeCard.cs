@@ -15,5 +15,6 @@ namespace CodeDeckAPI.Models
         public string JavaScriptAnswer { get; set; } = null;
         public string PythonAnswer { get; set; } = null;
         public string CAnswers { get; set; } = null;
+        public List<User> UserCard { get; set; }
     }
 }
